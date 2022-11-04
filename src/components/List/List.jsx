@@ -18,12 +18,14 @@ const List = ({setCoordinates}) => {
 
     const imageSelectHandler = (event) => {   {/* 이미지 입력 핸들러 */}
         const imageFile = event.target.files[0];
+        
         setFile(imageFile);
         setFileName(imageFile.name);
         const fileReader = new FileReader();
         fileReader.readAsDataURL(imageFile);
         fileReader.onload = e => setImgSrc(e.target.result);
         setExist(true);
+        console.log(imageFile);
     };
 
     const onSubmit = async (e) => {  

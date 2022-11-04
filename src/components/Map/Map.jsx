@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import GoogleMapReact from "google-map-react";
 import { Paper, Typography, useMediaQuery } from "@material-ui/core";
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
@@ -21,6 +21,117 @@ import * as BsIcons from 'react-icons/bs';
 
 const Map=({setCoordinates, coordinates})=>{
     const classes = useStyles();
+
+    const [mapMarkers, setMapMarkers] = useState([]);
+
+    useEffect(()=>{
+        setMapMarkers([...mapMarkers, coordinates]);
+    },[coordinates])
+    
+    const direction = true;
+
+    const markers = mapMarkers &&
+        mapMarkers.map((item, index)=>{
+            if((index%8) == 0) {
+                return(
+                    <div
+                    className="classes.markerContainer"
+                    lat={item.lat}
+                    lng={item.lng}
+                    key={index}
+                >
+                    <BsFillArrowUpCircleFill color="primary" size="40"/>
+                </div>
+                ) 
+            }
+            else if((index%8) == 1){
+                return(
+                    <div
+                    className="classes.markerContainer"
+                    lat={item.lat}
+                    lng={item.lng}
+                    key={index}
+                >
+                    <BsIcons.BsFillArrowUpRightCircleFill color="primary" size="40"/>
+                </div>
+                )
+            }
+            else if((index%8) == 2){
+                return(
+                    <div
+                    className="classes.markerContainer"
+                    lat={item.lat}
+                    lng={item.lng}
+                    key={index}
+                >
+                    <BsIcons.BsFillArrowRightCircleFill color="primary" size="40"/>
+                </div>
+                )
+            }
+            else if((index%8) == 3){
+                return(
+                    <div
+                    className="classes.markerContainer"
+                    lat={item.lat}
+                    lng={item.lng}
+                    key={index}
+                >
+                    <BsIcons.BsFillArrowDownRightCircleFill color="primary" size="40"/>
+                </div>
+                )
+            }
+            else if((index%8) == 4){
+                return(
+                    <div
+                    className="classes.markerContainer"
+                    lat={item.lat}
+                    lng={item.lng}
+                    key={index}
+                >
+                    <BsIcons.BsFillArrowDownCircleFill color="primary" size="40"/>
+                </div>
+                )
+            }
+            else if((index%8) == 5){
+                return(
+                    <div
+                    className="classes.markerContainer"
+                    lat={item.lat}
+                    lng={item.lng}
+                    key={index}
+                >
+                    <BsIcons.BsFillArrowDownLeftCircleFill color="primary" size="40"/>
+                </div>
+                )
+            }
+            else if((index%8) == 6){
+                return(
+                    <div
+                    className="classes.markerContainer"
+                    lat={item.lat}
+                    lng={item.lng}
+                    key={index}
+                >
+                    <BsIcons.BsFillArrowLeftCircleFill color="primary" size="40"/>
+                </div>
+                )
+            }
+            else{
+                return(
+                    <div
+                        className="classes.markerContainer"
+                        lat={item.lat}
+                        lng={item.lng}
+                        key={index}
+                    >
+                        <BsIcons.BsFillArrowUpLeftCircleFill color="primary" size="40"/>
+                    </div>
+                )
+
+            }
+            
+        })
+
     return(
         <div className={classes.mapContainer}>
             
@@ -37,15 +148,7 @@ const Map=({setCoordinates, coordinates})=>{
                 onChildClick={''}
             >
 
-                
-                <div
-                        className={classes.markerContainer}
-                        lat={coordinates.latitude}
-                        lng={coordinates.longitude}
-                        key={1}
-                    >
-                        <ImLocation2 color="primary" size="40"/>
-                </div>
+                {markers}
                 
 
             </GoogleMapReact>
