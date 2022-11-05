@@ -28,10 +28,55 @@ const Map=({setCoordinates, coordinates})=>{
         setMapMarkers([...mapMarkers, coordinates]);
     },[coordinates])
     
-    const direction = true;
+    const direction = [
+        {
+            lat: 52.5186,
+            lng: 13.4081,
+            dir: "up"
+        },
+        {
+            lat: 52.5185,
+            lng: 13.4081,
+            dir: "right"
+        },
+        {   
+            lat: 52.5185,
+            lng: 13.4082,
+            dir: "up"
+        },
+        
+    ]
 
-    const markers = mapMarkers &&
-        mapMarkers.map((item, index)=>{
+    const markers = direction &&
+        direction.map((item,index)=>{
+            if(item.dir == "up"){
+                return(
+                    <div
+                    className="classes.markerContainer"
+                    lat={item.lat}
+                    lng={item.lng}
+                    key={index}
+                >
+                    <BsFillArrowUpCircleFill color="primary" size="40"/>
+                </div>
+                ) 
+            }
+            else if(item.dir == "right"){
+                return(
+                    <div
+                    className="classes.markerContainer"
+                    lat={item.lat}
+                    lng={item.lng}
+                    key={index}
+                >
+                    <BsIcons.BsFillArrowRightCircleFill color="primary" size="40"/>
+                </div>
+                )  
+            }
+        })
+
+    {/* const markers = mapMarkers &&
+         mapMarkers.map((item, index)=>{
             if((index%8) == 0) {
                 return(
                     <div
@@ -128,15 +173,15 @@ const Map=({setCoordinates, coordinates})=>{
                     </div>
                 )
 
-            }
+            } 
             
-        })
+        }) */}
 
     return(
         <div className={classes.mapContainer}>
             
             <GoogleMapReact      
-                bootstrapURLKeys={{key:'AIzaSyAoO8DMKYK_rm2ETp1_ji0dmFFE1y1Ia2k'}}
+                bootstrapURLKeys={{key:''}}
                 defaultCenter={coordinates}
                 center={coordinates}
                 defaultZoom={19}
