@@ -10,7 +10,7 @@ import "./UploadForm.css";
 const List = ({setCoordinates}) => {
     const classes = useStyles();   // 스타일 설정
     
-    const defaultFileName= "Drag an image here or upload a file"
+    const defaultFileName= "Query image"
     const [file, setFile] = useState(null);
     const [imgSrc, setImgSrc] = useState(null);
     const [fileName, setFileName] = useState(defaultFileName);
@@ -25,10 +25,11 @@ const List = ({setCoordinates}) => {
         fileReader.readAsDataURL(imageFile);
         fileReader.onload = e => setImgSrc(e.target.result);
         setExist(true);
-        console.log(imageFile);
+
     };
 
     const onSubmit = async (e) => {  
+        
         e.preventDefault();   {/* 새로고침 방지 */}
        const formData = new FormData();
        formData.append("image", file)    
@@ -38,11 +39,13 @@ const List = ({setCoordinates}) => {
             });
             setTimeout(() =>{
               setFileName(defaultFileName);
+              
               setImgSrc(null);
               setExist(false);
             }, 3000);
        }catch(err){ 
         setFileName(defaultFileName);
+        setFile(null);
         setImgSrc(null);
         console.error(err);
         setExist(false);

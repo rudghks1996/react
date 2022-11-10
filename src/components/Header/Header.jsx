@@ -8,6 +8,7 @@ import * as AiIcons from "react-icons/ai"
 import './Header.css'
 import List from "../List/List";
 
+
 const Header=({setCoordinates})=>{
     
     const classes = useStyles();
@@ -29,6 +30,8 @@ const Header=({setCoordinates})=>{
                 <Typography variant="h5" className={classes.title}>
                     <div className='menu-bars'>   {/* 토글 메뉴바, 이미지 입력 폼 나옴 */}
                         <FaIcons.FaBars onClick={showSidebar}/>
+                        &nbsp; &nbsp; Navigation Direction Correction
+                        
                     </div>
                     <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
                         <ul className='nav-menu-items'>
@@ -37,12 +40,16 @@ const Header=({setCoordinates})=>{
                                     <AiIcons.AiOutlineClose onClick={showSidebar}/>   
                                 </div>
                             </li>
+                            ∎ Query Image
                             <List 
                                 setCoordinates={setCoordinates}
                             />   {/* 이미지 입력 폼은 List에서 작성 */}
+                            ∎ Street View
                         </ul>
                     </nav>             
+                    
                 </Typography>
+                
                 <Box display="flex">    {/* 주소를 통한 검색 (위도 경도 이동) */}
                     <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>   
                         <div className={classes.search}>

@@ -2,8 +2,8 @@ import React, {useState, useEffect} from "react";
 import { CssBaseline, Grid} from "@material-ui/core";
 import Header from "./components/Header/Header";
 import Map from "./components/Map/Map";
-
-
+import List from "./components/List/List";
+import Street from "./Street";
 const App = () => {      
     const[coordinates, setCoordinates] = useState({});  // 위도, 경도 설정
     
@@ -18,6 +18,7 @@ const App = () => {
               setCoordinates = {setCoordinates}
             />
             <Grid container spacing={3} style={{width : '100%'}}>
+                
                 <Map 
                     setCoordinates = {setCoordinates}
                     coordinates = {coordinates}
