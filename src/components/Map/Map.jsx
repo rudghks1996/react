@@ -79,7 +79,15 @@ const Map=({setCoordinates, coordinates})=>{
                             key={index}
                             >
                                 <Paper elevation={3} className={classes.paper}>
-                                    hi
+                                    <Typography classname={classes.Typography} variant="subtitle2" gutterBottom>
+                                        Details..
+                                    </Typography>
+                                        <div>
+                                            lat
+                                        </div>
+                                            lng
+                                    
+                                    
                                 </Paper>
                             </div>
                         
@@ -127,7 +135,7 @@ const Map=({setCoordinates, coordinates})=>{
         <div className={classes.mapContainer}>
             
             <GoogleMapReact      
-                bootstrapURLKeys={{key:'AIzaSyAMeiwDJo9-yn6tRqHJQNDaya99IKUaiLE'}}
+                bootstrapURLKeys={{key:''}}
                 defaultCenter={coordinates}
                 center={coordinates}
                 defaultZoom={19}

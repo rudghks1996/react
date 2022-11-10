@@ -7,9 +7,9 @@ import * as FaIcons from "react-icons/fa"
 import * as AiIcons from "react-icons/ai"
 import './Header.css'
 import List from "../List/List";
+import Strview from "../Streetview/Strview";
 
-
-const Header=({setCoordinates})=>{
+const Header=({setCoordinates, coordinates})=>{
     
     const classes = useStyles();
     const [autocomplete, setAutocomplete] = useState(null);
@@ -44,7 +44,12 @@ const Header=({setCoordinates})=>{
                             <List 
                                 setCoordinates={setCoordinates}
                             />   {/* 이미지 입력 폼은 List에서 작성 */}
+                            <br/>
                             ∎ Street View
+                            <br />
+                            <Strview 
+                                coordinates = {coordinates}
+                            />
                         </ul>
                     </nav>             
                     

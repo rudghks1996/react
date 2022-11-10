@@ -16,6 +16,7 @@ const App = () => {
             <CssBaseline />
             <Header 
               setCoordinates = {setCoordinates}
+              coordinates = {coordinates}
             />
             <Grid container spacing={3} style={{width : '100%'}}>
                 
