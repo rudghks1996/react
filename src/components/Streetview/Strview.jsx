@@ -1,42 +1,38 @@
-import React, { useEffect, useState } from "react";
-import ReactStreetview from "react-streetview";
+import React, {useState} from "react";
+import GoogleStreetview from "react-google-streetview";
+import { GoogleMap } from "@react-google-maps/api";
+import { LoadScript } from "@react-google-maps/api";
+import { StreetViewPanorama } from "@react-google-maps/api";
+
+
 
 const Strview = ({coordinates}) => {
-  const googleMapsApiKey = "AIzaSyAMeiwDJo9-yn6tRqHJQNDaya99IKUaiLE";
-  const [positions, setpositions] = useState({
-    lat: 52.5186,
-    lng: 13.4081
-  });
-  
-  useEffect(() => {
-    setpositions(coordinates.lat, coordinates.lng);
+  const APIkey = "";
 
-  }, coordinates);
-  const streetViewPanoramaOptions = {
-    position: { lat: positions.lat, lng: positions.lng },
-    pov: { heading: 100, pitch: 0 },
-    zoom: 1,
-    addressControl: true,
-    showRoadLabels: true,
-    zoomControl: true
+  const center = {
+    lat: 36.5247596,
+    lng: -122.2583719
   };
 
-    return (
-        <div
-      style={{
-        width: "350px",
-        height: "350px",
-        
-      }}
-    >
-        <br/>
-      <ReactStreetview
-        apiKey={googleMapsApiKey}
-        streetViewPanoramaOptions={streetViewPanoramaOptions}
-      />
-    </div>
+  const [map,setMap] = useState(null);
 
-    )
+  const onUnmount = React.useCallback(function callback(map) {
+    setMap(null)
+  }, [])
+
+  return(
+    <LoadScript googleMapsApiKey={""}>
+  <GoogleMap
+    mapContainerStyle={{width: "70%", height: "30%"}}
+    center={center}
+    zoom={10}
+    options = {''}
+  >
+    <StreetViewPanorama position={center} visible={true}/>
+  </GoogleMap>
+</LoadScript>
+  )
+    
 }
 
 export default Strview

@@ -17,17 +17,111 @@ import * as BsIcons from 'react-icons/bs';
  하좌:BsFillArrowDownLeftCircleFill
  하우:BsFillArrowDownRightCircleFill
  */
-const Map=({setCoordinates, coordinates})=>{
+const Map=({setCoordinates, coordinates, mapMarkers, setMapMarkers})=>{
     const classes = useStyles();
-
-    const [mapMarkers, setMapMarkers] = useState([]);
     const [paper, setPaper] = useState(false);
-
+     
     useEffect(()=>{
-        setMapMarkers([...mapMarkers, coordinates]);
+        console.log(coordinates);
     },[coordinates])
+
+    const markers = mapMarkers && mapMarkers.map((item,index)=>{
+        if(item.dir == "upleft"){
+                return(
+                        <div
+                        className="classes.markerContainer"
+                        lat={item.lat}
+                        lng={item.lng}
+                        key={index}
+                        >
+                        <BsIcons.BsFillArrowUpLeftCircleFill color="primary" size="40"/>
+                        </div>
+                    )
+        }else if(item.dir == "up"){
+            return(
+                <div
+                className="classes.markerContainer"
+                lat={item.lat}
+                lng={item.lng}
+                key={index}
+                >
+                <BsIcons.BsFillArrowUpCircleFill color="primary" size="40"/>
+                </div>
+            )
+        }else if(item.dir == "upright"){
+            return(
+                <div
+                className="classes.markerContainer"
+                lat={item.lat}
+                lng={item.lng}
+                key={index}
+                >
+                <BsIcons.BsFillArrowUpRightCircleFill color="primary" size="40"/>
+                </div>
+            )
+        }else if(item.dir == "right"){
+            return(
+                <div
+                className="classes.markerContainer"
+                lat={item.lat}
+                lng={item.lng}
+                key={index}
+                >
+                <BsIcons.BsFillArrowRightCircleFill color="primary" size="40"/>
+                </div>
+            )
+        }else if(item.dir == "downright"){
+            return(
+                <div
+                className="classes.markerContainer"
+                lat={item.lat}
+                lng={item.lng}
+                key={index}
+                >
+                <BsIcons.BsFillArrowDownRightCircleFill color="primary" size="40"/>
+                </div>
+            )
+        }else if(item.dir == "down"){
+            return(
+                <div
+                className="classes.markerContainer"
+                lat={item.lat}
+                lng={item.lng}
+                key={index}
+                >
+                <BsIcons.BsFillArrowDownCircleFill color="primary" size="40"/>
+                </div>
+            )
+        }else if(item.dir == "downleft"){
+            return(
+                <div
+                className="classes.markerContainer"
+                lat={item.lat}
+                lng={item.lng}
+                key={index}
+                >
+                <BsIcons.BsFillArrowDownLeftCircleFill color="primary" size="40"/>
+                </div>
+            )
+        }else if(item.dir == "left"){
+            return(
+                <div
+                className="classes.markerContainer"
+                lat={item.lat}
+                lng={item.lng}
+                key={index}
+                >
+                <BsIcons.BsFillArrowLeftCircleFill color="primary" size="40"/>
+                </div>
+            )
+        }
+
+
+    })
+
+
     
-    const direction = [
+    /* const direction = [
         {
             lat: 52.5181,
             lng: 13.4078,
@@ -83,9 +177,9 @@ const Map=({setCoordinates, coordinates})=>{
                                         Details..
                                     </Typography>
                                         <div>
-                                            lat
+                                            lat : {item.lat}
                                         </div>
-                                            lng
+                                            lng : {item.lng}
                                     
                                     
                                 </Paper>
@@ -120,7 +214,7 @@ const Map=({setCoordinates, coordinates})=>{
                 </div>
                 )  
             }
-        })
+        }) */
 
         const markerhandler = (event) => {   {/* 이미지 입력 핸들러 */}
             if(paper){

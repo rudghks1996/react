@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { Autocomplete } from "@react-google-maps/api";
 import { AppBar, Toolbar, Typography, InputBase, Box } from "@material-ui/core";
 import SearchIcon from '@material-ui/icons/Search';
@@ -9,10 +9,14 @@ import './Header.css'
 import List from "../List/List";
 import Strview from "../Streetview/Strview";
 
-const Header=({setCoordinates, coordinates})=>{
+const Header=({setCoordinates, coordinates, mapMarkers, setMapMarkers})=>{
     
     const classes = useStyles();
     const [autocomplete, setAutocomplete] = useState(null);
+
+    
+
+    
 
     const onLoad = (autoC) => setAutocomplete(autoC);
     const onPlaceChanged = () => {
@@ -43,13 +47,13 @@ const Header=({setCoordinates, coordinates})=>{
                             ∎ Query Image
                             <List 
                                 setCoordinates={setCoordinates}
+                                mapMarkers={mapMarkers}
+                                setMapMarkers={setMapMarkers}
                             />   {/* 이미지 입력 폼은 List에서 작성 */}
                             <br/>
                             ∎ Street View
                             <br />
-                            <Strview 
-                                coordinates = {coordinates}
-                            />
+                            <Strview />
                         </ul>
                     </nav>             
                     

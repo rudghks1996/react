@@ -6,7 +6,8 @@ import List from "./components/List/List";
 import Street from "./Street";
 const App = () => {      
     const[coordinates, setCoordinates] = useState({});  // 위도, 경도 설정
-    
+    const [mapMarkers, setMapMarkers] = useState([]);
+
     useEffect(()=>{ 
         setCoordinates({lat:52.5186, lng:13.4081});
     },[])   //첫 위치 위도, 경도 베를린으로 설정 (베를린 위도 : 52.5186, 경도 : 13.4081) 
@@ -17,12 +18,16 @@ const App = () => {
             <Header 
               setCoordinates = {setCoordinates}
               coordinates = {coordinates}
+              mapMarkers = {mapMarkers}
+              setMapMarkers = {setMapMarkers}
             />
             <Grid container spacing={3} style={{width : '100%'}}>
                 
                 <Map 
                     setCoordinates = {setCoordinates}
                     coordinates = {coordinates}
+                    mapMarkers = {mapMarkers}
+                    setMapMarkers = {setMapMarkers}
                 />
             </Grid>
         </>

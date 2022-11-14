@@ -7,7 +7,7 @@ import axios from "axios";
 import "./UploadForm.css";
 
 
-const List = ({setCoordinates}) => {
+const List = ({setCoordinates, mapMarkers, setMapMarkers}) => {
     const classes = useStyles();   // 스타일 설정
     
     const defaultFileName= "Query image"
@@ -15,21 +15,20 @@ const List = ({setCoordinates}) => {
     const [imgSrc, setImgSrc] = useState(null);
     const [fileName, setFileName] = useState(defaultFileName);
     const [exist, setExist] = useState(false);
+    
+    
 
     const imageSelectHandler = (event) => {   {/* 이미지 입력 핸들러 */}
         const imageFile = event.target.files[0];
-        
         setFile(imageFile);
         setFileName(imageFile.name);
         const fileReader = new FileReader();
         fileReader.readAsDataURL(imageFile);
         fileReader.onload = e => setImgSrc(e.target.result);
         setExist(true);
-
     };
 
     const onSubmit = async (e) => {  
-        
         e.preventDefault();   {/* 새로고침 방지 */}
        const formData = new FormData();
        formData.append("image", file)    
@@ -37,12 +36,15 @@ const List = ({setCoordinates}) => {
             const res = await axios.post("/upload", formData, {
                 headers: { "Content-Type" : "multipart/form-data"}, 
             });
+            const lat = res.data.lat;
+            const lng = res.data.lng;
+            
+            setMapMarkers([...mapMarkers, res.data]);
+
             setTimeout(() =>{
-              setFileName(defaultFileName);
-              
               setImgSrc(null);
               setExist(false);
-            }, 3000);
+            }, 1000);
        }catch(err){ 
         setFileName(defaultFileName);
         setFile(null);
@@ -50,7 +52,13 @@ const List = ({setCoordinates}) => {
         console.error(err);
         setExist(false);
        }
+       
     };
+
+    useEffect(()=>{
+        console.log(mapMarkers);
+    },[mapMarkers]) 
+    
  
    
 
@@ -63,7 +71,7 @@ const List = ({setCoordinates}) => {
                     <input id="image" type="file" accept="image/*" onChange={imageSelectHandler} /> 
                 </div>
                 <div>
-                <button type="submit" style={{width: "95%", height:40, borderRadius:"3px", cursor:"pointer", marginBottom:"10px"}}>search</button>
+                <button type="submit" style={{width: "95%", backgroundColor: "gray",color:"white" , height:"40px", borderRadius:"3px", cursor:"pointer", marginBottom:"10px"}}>search</button>
                 </div>
             </form> 
             
